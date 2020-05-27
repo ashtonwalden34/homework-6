@@ -19,11 +19,12 @@ searchBtn.on("click", function(event) {
     // adds the list item to search history
     $("#searchHistoryList").append(liCity);
 
-    weatherSearch();
+    currentWeatherSearch();
+    forecastWeatherSearch();
 });
 
 
-function weatherSearch() {
+function currentWeatherSearch() {
     var city = $("#cityInput").val();
     console.log(city);
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=cac3367a562f36aaf2f8245426d6c3bd";
@@ -31,14 +32,14 @@ function weatherSearch() {
     $.ajax({
         url: queryURL,
         method: "GET"
-    }).then (function(response) {
-        console.log(response)
-        
+    }).then (function(response) {        
         // Assigns variables for elements returned by API response
         let name = response.name;
         let icon = response.weather[0].icon;
         let iconLink = "https://openweathermap.org/img/wn/" + icon + "@2x.png";
+        // temperature is in kelvins
         let temp = response.main.temp;
+        let tempF = ((temp - 273.15) * 9/5 + 32).toFixed(2)
         let windSpeed = response.wind.speed;
         let humidity = response.main.humidity;
     
@@ -50,7 +51,7 @@ function weatherSearch() {
         // Assignes variables and stores API response values in html elements
         let nameDisplay = $("<h5>").text(name);
         let iconDisplay = $("<img>").attr("src", iconLink);
-        let tempDisplay = $("<li>").text("Temperature: " + temp);
+        let tempDisplay = $("<li>").text("Temperature: " + tempF);
         let windSpeedDisplay = $("<li>").text("Wind speed: " + windSpeed);
         let humidityDisplay = $("<li>").text("Humidity: " + humidity);
 
@@ -63,3 +64,39 @@ function weatherSearch() {
     })
 };
 
+function forecastWeatherSearch() {
+    var city = $("#cityInput").val();
+    console.log(city);
+    var queryURL = "https://api.openweathermap.org/data/2.5/forecast/daily?q=" + city + "&cnt=5&appid=cac3367a562f36aaf2f8245426d6c3bd";
+
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then (function(response) {
+        console.log(response)
+
+        // Sets varaible for forecast data div
+        let forecastDiv = $("#weatherForecast");
+        
+        // Creates variables to hold response data
+        let forecastDate = response.list.dt;
+        let forecastIcon = response.list.weather.icon;
+        let forecastIconLink = "https://openweathermap.org/img/wn/" + forecastIcon + "@2x.png";
+        let forecastTemp = response.list.temp;
+        let forecastHumidity = response.list.humidity;
+
+        // Stores response data in html elements
+        let forecastDateDisplay = $("<p>").text(forecastDate);
+        let forecastIconDisplay = $("<img").attr("src", forecastIconLink);
+        let forecastTempDisplay = $("<p>").text(forecastTemp);
+        let forecastHumidityDisplay = $("<p>").text(forecastHumidity);
+
+        // appends html elements to page
+        forecastDiv.append(forecastDateDisplay);
+        forecastDiv.append(forecastIconDisplay);
+        forecastDiv.append(forecastTempDisplay);
+        forecastDiv.append(forecastHumidityDisplay);
+    })
+};
+
+// api.openweathermap.org/data/2.5/forecast/daily?q={city name}&cnt={cnt}&appid={your api key}
