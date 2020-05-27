@@ -1,0 +1,65 @@
+.pageWrapper {
+    background-color: lightgray;
+    height: 100vh;
+    width: 100vw;
+}
+
+#searchWrapper {
+    border: solid navajowhite 1px;
+    height: 80vh;
+    float: left;
+    text-align: center;
+    padding-top: 2vh;
+}
+
+#citySearch {
+    border: solid blue 1px;
+    width: unset;
+    height: 15vh;
+    padding-top: 2vh;
+}
+
+#searchHistory {
+    height: 60vh;
+    border: solid purple 1px;
+    padding-top: 2vh;
+}
+
+#searchHistoryTitle {
+    width: fit-content;
+    height: fit-content;
+    text-decoration-line: underline;
+    margin: 0;
+}
+
+#weatherWrapper {
+    border: solid red 1px;
+    height: 80vh;
+    float: left;
+    padding-top: 2vh;
+}
+
+#currentWeather {
+    height: 45vh;
+    border: solid green 3px;
+}
+
+#currentWeatherTitle {
+    width: fit-content;
+    height: fit-content;
+    text-decoration-line: underline;
+    margin: 0;
+}
+
+#weatherForecast {
+    height: 30vh;
+    border: solid aqua 3px;
+}
+
+#forecastTitle {
+    width: fit-content;
+    height: fit-content;
+    text-decoration-line: underline;
+    margin: 0;
+}
+

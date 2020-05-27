@@ -4,37 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="./assets/style.css">
 </head>
 
 <body>
-    <div id="searchWrapper">
-        <div id="citySearch">
 
+<div class="pageWrapper">
+    <div class="row">
+
+        <div class="col s4">
+            <form id="citySearch">
+                <label for="cityInput">Search by city name</label>
+                <input type="text" id="cityInput">
+                <input id="searchBtn" type="submit" value="Search">
+            </form>
+            <!-- Store previous searches here -->
+            <div id="searchHistory">
+                <h4 id="searchHistoryTitle">Search History</h4>
+                <div class="collection" id="searchHistoryList"> </div>
+            </div>
         </div>
-    
-        <div id="searchHistory">
-    
+
+        <div class="col s8" id="weatherWrapper">
+            <!-- Place holder for current weather response -->
+            <div id="currentWeather">
+                <h4 id="currentWeatherTitle">Current Weather</h4>
+            </div>
+            <!-- Place holder for forecast response -->
+            <div id="weatherForecast">
+                <h4 id="forecastTitle">5 Day Forecast</h4>
+            </div>
         </div>
+
     </div>
+</div>
 
-    <div id="weatherWrapper">
-        <div id="currentWeather">
-
-        </div>
-        
-        <div id="weatherForecast">
-            
-        </div>
-    </div>
-    
-    
+ 
 
 
-    <script 
-        src="https://code.jquery.com/jquery-3.5.1.slim.js" 
-        integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" 
-        crossorigin="anonymous">
-    </script>
-    <script src="script.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>  
+  
+  <script src="./script.js"></script>
+
+
 </body>
 </html>
