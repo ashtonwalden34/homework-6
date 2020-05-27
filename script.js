@@ -33,6 +33,25 @@ function weatherSearch() {
         method: "GET"
     }).then (function(response) {
         console.log(response)
+
+        let name = response.name;
+        let icon = response.weather[0].icon;
+        let iconLink = "https://openweathermap.org/img/wn/" + icon + "@2x.png";
+        let temp = response.main.temp;
+        let windSpeed = response.wind.speed;
+        let humidity = response.main.humidity;
+    
+
+        let currentWeatherDiv = $("#currentWeather");
+
+        let nameDisplay = $("<p>").text(name);
+        let iconDisplay = $("<img>").attr("src", iconLink);
+
+
+        currentWeatherDiv.append(nameDisplay);
+        currentWeatherDiv.append(iconDisplay);
+
+
     })
 };
 
