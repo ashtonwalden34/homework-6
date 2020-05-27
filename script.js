@@ -33,7 +33,8 @@ function weatherSearch() {
         method: "GET"
     }).then (function(response) {
         console.log(response)
-
+        
+        // Assigns variables for elements returned by API response
         let name = response.name;
         let icon = response.weather[0].icon;
         let iconLink = "https://openweathermap.org/img/wn/" + icon + "@2x.png";
@@ -41,17 +42,24 @@ function weatherSearch() {
         let windSpeed = response.wind.speed;
         let humidity = response.main.humidity;
     
-
+        // Assigns variable for html elment to store current weather in
         let currentWeatherDiv = $("#currentWeather");
+        let currentWeatherConditionsUl = $("#currentWeatherConditions");
+        let currentCityDiv = $("#currentCityName");
 
-        let nameDisplay = $("<p>").text(name);
+        // Assignes variables and stores API response values in html elements
+        let nameDisplay = $("<h5>").text(name);
         let iconDisplay = $("<img>").attr("src", iconLink);
+        let tempDisplay = $("<li>").text("Temperature: " + temp);
+        let windSpeedDisplay = $("<li>").text("Wind speed: " + windSpeed);
+        let humidityDisplay = $("<li>").text("Humidity: " + humidity);
 
-
-        currentWeatherDiv.append(nameDisplay);
+        // Displays API response variables that are stored as html elements
+        currentCityDiv.append(nameDisplay);
         currentWeatherDiv.append(iconDisplay);
-
-
+        currentWeatherConditionsUl.append(tempDisplay);
+        currentWeatherConditionsUl.append(windSpeedDisplay);
+        currentWeatherConditionsUl.append(humidityDisplay);
     })
 };
 
