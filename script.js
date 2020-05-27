@@ -19,11 +19,29 @@ searchBtn.on("click", function(event) {
     // adds the list item to search history
     $("#searchHistoryList").append(liCity);
 
+    $("#currentCityName").empty();
+    $("#currentWeatherConditions").empty();
+    $("#currentWeatherIcon").empty();
+
+
     currentWeatherSearch();
     forecastWeatherSearch();
 });
 
+// stores city names being stored in search history in a variable
+let searchHistoryCity = $("#searchHistoryList").val();
 
+// function to allow user to search by clicking on a city in search history
+searchHistoryCity.on("click", function(event) {
+    event.preventDefault();
+    console.log("click history");
+
+    currentWeatherSearch();
+    forecastWeatherSearch();
+})
+
+
+// function to make API call for current weather conditions
 function currentWeatherSearch() {
     var city = $("#cityInput").val();
     console.log(city);
@@ -47,6 +65,7 @@ function currentWeatherSearch() {
         let currentWeatherDiv = $("#currentWeather");
         let currentWeatherConditionsUl = $("#currentWeatherConditions");
         let currentCityDiv = $("#currentCityName");
+        let currentWeatherIconDiv = $("#currentWeatherIcon");
 
         // Assignes variables and stores API response values in html elements
         let nameDisplay = $("<h5>").text(name);
@@ -57,7 +76,7 @@ function currentWeatherSearch() {
 
         // Displays API response variables that are stored as html elements
         currentCityDiv.append(nameDisplay);
-        currentWeatherDiv.append(iconDisplay);
+        currentWeatherIconDiv.append(iconDisplay);
         currentWeatherConditionsUl.append(tempDisplay);
         currentWeatherConditionsUl.append(windSpeedDisplay);
         currentWeatherConditionsUl.append(humidityDisplay);
