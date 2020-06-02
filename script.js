@@ -19,22 +19,26 @@ searchBtn.on("click", function(event) {
     // adds the list item to search history
     $("#searchHistoryList").append(liCity);
 
+    /*
     $("#currentCityName").empty();
     $("#currentWeatherConditions").empty();
     $("#currentWeatherIcon").empty();
-
+    */
 
     currentWeatherSearch();
     forecastWeatherSearch();
 });
 
 // stores city names being stored in search history in a variable
-let searchHistoryCity = $("#searchHistoryList").val();
+let searchHistoryCity = $("#searchHistoryList")
+
 
 // function to allow user to search by clicking on a city in search history
-searchHistoryCity.on("click", function(event) {
+$(document).on("click", '.collection-item',function(event) {
     event.preventDefault();
     console.log("click history");
+
+    $("#currentWeather").val() = c;
 
     currentWeatherSearch();
     forecastWeatherSearch();
@@ -62,8 +66,9 @@ function currentWeatherSearch() {
         let humidity = response.main.humidity;
     
         // Assigns variable for html elment to store current weather in
-        let currentWeatherDiv = $("#currentWeather");
-        let currentWeatherConditionsUl = $("#currentWeatherConditions");
+        let currentWeatherConditionsLiTemp = $("#currentWeatherConditionsTemp");
+        let currentWeatherConditionsLiWind = $("#currentWeatherConditionsWind");
+        let currentWeatherConditionsLiHumidity = $("#currentWeatherConditionsHumidity");
         let currentCityDiv = $("#currentCityName");
         let currentWeatherIconDiv = $("#currentWeatherIcon");
 
@@ -75,27 +80,57 @@ function currentWeatherSearch() {
         let humidityDisplay = $("<li>").text("Humidity: " + humidity);
 
         // Displays API response variables that are stored as html elements
-        currentCityDiv.append(nameDisplay);
-        currentWeatherIconDiv.append(iconDisplay);
-        currentWeatherConditionsUl.append(tempDisplay);
-        currentWeatherConditionsUl.append(windSpeedDisplay);
-        currentWeatherConditionsUl.append(humidityDisplay);
+        currentCityDiv.html(nameDisplay);
+        currentWeatherIconDiv.html(iconDisplay);
+        currentWeatherConditionsLiTemp.html(tempDisplay);
+        currentWeatherConditionsLiWind.html(windSpeedDisplay);
+        currentWeatherConditionsLiHumidity.html(humidityDisplay);
     })
 };
 
 function forecastWeatherSearch() {
     var city = $("#cityInput").val();
     console.log(city);
-    var queryURL = "https://api.openweathermap.org/data/2.5/forecast/daily?q=" + city + "&cnt=5&appid=cac3367a562f36aaf2f8245426d6c3bd";
+    var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=cac3367a562f36aaf2f8245426d6c3bd";
 
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then (function(response) {
-        console.log(response)
+        console.log(response.list)
 
         // Sets varaible for forecast data div
         let forecastDiv = $("#weatherForecast");
+
+        var forecastDateArray = [];
+
+
+
+        for (var i = 0; i < response.list.length; i++) {
+           // console.log(response.list[i].dt_txt.split(' '))
+
+            if (response.list[i].dt_txt.split(' ')[1] === "00:00:00") {
+                forecastDateArray.push(response.list[i])
+
+               
+            }
+        }
+
+        for (var i = 0; i < forecastDateArray.length; i++) {
+            console.log(forecastDateArray[i].main.temp);
+
+            let forecastTemp = forecastDateArray[i].main.temp;
+            let forecastHumidity
+
+            let forecastTempDisplay = $("<p>").text(forecastTemp);
+
+
+            forecastDiv.append(forecastTempDisplay);
+         }
+
+
+
+        
         
         // Creates variables to hold response data
         let forecastDate = response.list.dt;
@@ -104,6 +139,8 @@ function forecastWeatherSearch() {
         let forecastTemp = response.list.temp;
         let forecastHumidity = response.list.humidity;
 
+
+        /*
         // Stores response data in html elements
         let forecastDateDisplay = $("<p>").text(forecastDate);
         let forecastIconDisplay = $("<img").attr("src", forecastIconLink);
@@ -115,6 +152,8 @@ function forecastWeatherSearch() {
         forecastDiv.append(forecastIconDisplay);
         forecastDiv.append(forecastTempDisplay);
         forecastDiv.append(forecastHumidityDisplay);
+
+        */
     })
 };
 
