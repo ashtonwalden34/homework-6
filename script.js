@@ -1,13 +1,11 @@
 // cac3367a562f36aaf2f8245426d6c3bd
 // api.openweathermap.org/data/2.5/weather?q={city name}&appid={api key}
 
-/*
-    var city = $("#cityInput");
-    console.log(city);
-    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=cac3367a562f36aaf2f8245426d6c3bd";
-*/
-
+// creates variable for search button
 let searchBtn = $("#searchBtn");
+
+// stores city names being stored in search history in a variable
+let searchHistoryCityList = $("#searchHistoryList")
 
 // Function when search button is clicked
 searchBtn.on("click", function(event) {
@@ -15,40 +13,33 @@ searchBtn.on("click", function(event) {
     // assigns new variable for name of city
     let searchCity = $("#cityInput").val();
     // Creates a new list item and stores the city name
+    // stores searched city in list item in html
     var liCity = $("<li>").addClass("collection-item").text(searchCity);
+    
     // adds the list item to search history
     $("#searchHistoryList").append(liCity);
 
-    /*
-    $("#currentCityName").empty();
-    $("#currentWeatherConditions").empty();
-    $("#currentWeatherIcon").empty();
-    */
 
     currentWeatherSearch();
     forecastWeatherSearch();
 });
 
-// stores city names being stored in search history in a variable
-let searchHistoryCity = $("#searchHistoryList")
-
 
 // function to allow user to search by clicking on a city in search history
 $(document).on("click", '.collection-item',function(event) {
     event.preventDefault();
-    console.log("click history");
 
-    $("#currentWeather").val() = c;
+    $("#currentWeather").val() = searchHistoryCity;
 
-    currentWeatherSearch();
-    forecastWeatherSearch();
+    currentWeatherSearch(searchHistoryCity);
+    forecastWeatherSearch(searchHistoryCity);
 })
 
 
 // function to make API call for current weather conditions
 function currentWeatherSearch() {
     var city = $("#cityInput").val();
-    console.log(city);
+   
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=cac3367a562f36aaf2f8245426d6c3bd";
 
     $.ajax({
@@ -61,6 +52,7 @@ function currentWeatherSearch() {
         let iconLink = "https://openweathermap.org/img/wn/" + icon + "@2x.png";
         // temperature is in kelvins
         let temp = response.main.temp;
+        // converts temp to farenheit
         let tempF = ((temp - 273.15) * 9/5 + 32).toFixed(2)
         let windSpeed = response.wind.speed;
         let humidity = response.main.humidity;
@@ -76,7 +68,7 @@ function currentWeatherSearch() {
         let nameDisplay = $("<h5>").text(name);
         let iconDisplay = $("<img>").attr("src", iconLink);
         let tempDisplay = $("<li>").text("Temperature: " + tempF);
-        let windSpeedDisplay = $("<li>").text("Wind speed: " + windSpeed);
+        let windSpeedDisplay = $("<li>").text("Wind speed: " + windSpeed + " mph");
         let humidityDisplay = $("<li>").text("Humidity: " + humidity);
 
         // Displays API response variables that are stored as html elements
@@ -88,9 +80,12 @@ function currentWeatherSearch() {
     })
 };
 
+
+// function to search for weather forecast
 function forecastWeatherSearch() {
+    // variable to store city typed in by user
     var city = $("#cityInput").val();
-    console.log(city);
+    // url for API call
     var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=cac3367a562f36aaf2f8245426d6c3bd";
 
     $.ajax({
@@ -103,7 +98,6 @@ function forecastWeatherSearch() {
         let forecastDiv = $("#weatherForecast");
 
         var forecastDateArray = [];
-
 
 
         for (var i = 0; i < response.list.length; i++) {
@@ -119,41 +113,27 @@ function forecastWeatherSearch() {
         for (var i = 0; i < forecastDateArray.length; i++) {
             console.log(forecastDateArray[i].main.temp);
 
+            let forecastDate = forecastDateArray[i].dt_txt;
             let forecastTemp = forecastDateArray[i].main.temp;
-            let forecastHumidity
+            let forecastHumidity = forecastDateArray[i].main.humidity;
+            let forecastIcon = forecastDateArray[i].weather[0].icon;
+            let forecastIconUrl = "https://openweathermap.org/img/wn/" + forecastIcon + "@2x.png";
 
-            let forecastTempDisplay = $("<p>").text(forecastTemp);
+            let forecastDateDisplay = $("<p>").text(forecastDate);
+            let forecastTempDisplay = $("<p>").text("Temperature: " + forecastTemp);
+            let forecastHumidityDisplay = $("<p>").text("Humidity: " + forecastHumidity);
+            let forecastIconDisplay = $("<img>").attr("src", forecastIconUrl);
 
-
+            forecastDiv.append(forecastDateDisplay);
             forecastDiv.append(forecastTempDisplay);
+            forecastDiv.append(forecastHumidityDisplay);
+            forecastDiv.append(forecastIconDisplay);
          }
 
 
 
         
         
-        // Creates variables to hold response data
-        let forecastDate = response.list.dt;
-        let forecastIcon = response.list.weather.icon;
-        let forecastIconLink = "https://openweathermap.org/img/wn/" + forecastIcon + "@2x.png";
-        let forecastTemp = response.list.temp;
-        let forecastHumidity = response.list.humidity;
-
-
-        /*
-        // Stores response data in html elements
-        let forecastDateDisplay = $("<p>").text(forecastDate);
-        let forecastIconDisplay = $("<img").attr("src", forecastIconLink);
-        let forecastTempDisplay = $("<p>").text(forecastTemp);
-        let forecastHumidityDisplay = $("<p>").text(forecastHumidity);
-
-        // appends html elements to page
-        forecastDiv.append(forecastDateDisplay);
-        forecastDiv.append(forecastIconDisplay);
-        forecastDiv.append(forecastTempDisplay);
-        forecastDiv.append(forecastHumidityDisplay);
-
-        */
     })
 };
 
