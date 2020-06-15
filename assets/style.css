@@ -41,6 +41,10 @@
     float: right;
 }
 
+#currentDate{
+    font-size: large;
+}
+
 #currentWeather {
     height: 45vh;
     border: solid green 3px;

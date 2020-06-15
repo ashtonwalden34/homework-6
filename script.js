@@ -7,6 +7,15 @@ let searchBtn = $("#searchBtn");
 // stores city names being stored in search history in a variable
 let searchHistoryCityList = $("#searchHistoryList")
 
+// adding current date
+let currentDate = new Date();
+let day = String(currentDate.getDate()).padStart(2, '0');
+let month = String(currentDate.getMonth() + 1).padStart(2, '0'); //January is 0!
+let year = currentDate.getFullYear();
+
+let date = month + '-' + day + '-' + year;
+$("#currentDate").text(date);
+
 // Function when search button is clicked
 searchBtn.on("click", function(event) {
     event.preventDefault();
@@ -21,18 +30,6 @@ searchBtn.on("click", function(event) {
     currentWeatherSearch();
     forecastWeatherSearch();
 });
-
-
-// function to allow user to search by clicking on a city in search history
-$(document).on("click", '.collection-item',function(event) {
-    event.preventDefault();
-
-    $("#currentWeather").val() = searchHistoryCity;
-
-    currentWeatherSearch(searchHistoryCity);
-    forecastWeatherSearch(searchHistoryCity);
-})
-
 
 // function to make API call for current weather conditions
 function currentWeatherSearch() {
@@ -90,7 +87,7 @@ function forecastWeatherSearch() {
         url: queryURL,
         method: "GET"
     }).then (function(response) {
-        console.log(response.list)
+        // console.log(response.list)
 
         // Sets varaible for forecast data div
         let forecastDiv = $("#weatherForecast")
@@ -132,10 +129,19 @@ function forecastWeatherSearch() {
             forecastDiv.append(forecastHumidityDisplay);
             forecastDiv.append(forecastIconDisplay);
          }
-
-
-
     })
 };
+
+// function to allow user to search by clicking on a city in search history
+$(document).on("click", '.collection-item',function(event) {
+    event.preventDefault();
+
+    let searchHistoryCity = $(".collection-item").text().trim();
+
+    console.log(searchHistoryCity);
+
+    currentWeatherSearch(searchHistoryCity);
+    forecastWeatherSearch(searchHistoryCity);
+});
 
 // api.openweathermap.org/data/2.5/forecast/daily?q={city name}&cnt={cnt}&appid={your api key}
