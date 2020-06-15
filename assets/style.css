@@ -1,65 +1,117 @@
 .pageWrapper {
-    background-color: lightgray;
+    background-color: lightblue;
     height: 100vh;
     width: 100vw;
 }
 
 #searchWrapper {
     border: solid navajowhite 1px;
-    height: 80vh;
-    float: left;
+    height: 100vh;
     text-align: center;
     padding-top: 2vh;
+    width: 20vw;  
 }
 
 #citySearch {
     border: solid blue 1px;
-    width: unset;
-    height: 15vh;
     padding-top: 2vh;
+    width: 18vw;
 }
 
 #searchHistory {
-    height: 60vh;
     border: solid purple 1px;
     padding-top: 2vh;
+    height: 76vh;
+    overflow: hidden;
+    width: 18vw;
 }
 
 #searchHistoryTitle {
-    width: fit-content;
-    height: fit-content;
     text-decoration-line: underline;
     margin: 0;
 }
 
 #weatherWrapper {
     border: solid red 1px;
-    height: 80vh;
-    float: left;
+    height: 94.5vh;
     padding-top: 2vh;
+    overflow: hidden;
+    width: 80vw;
+    margin-right: 0;
+    float: right;
 }
 
 #currentWeather {
     height: 45vh;
     border: solid green 3px;
+    text-align: center;
 }
 
 #currentWeatherTitle {
-    width: fit-content;
-    height: fit-content;
     text-decoration-line: underline;
     margin: 0;
 }
 
 #weatherForecast {
-    height: 30vh;
     border: solid aqua 3px;
+    text-align: center;
 }
 
 #forecastTitle {
-    width: fit-content;
-    height: fit-content;
     text-decoration-line: underline;
     margin: 0;
 }
 
+/*
+#forecastDay1 {
+    border: solid purple 1px;
+    height: 35vh;
+    overflow: hidden;
+    float: left;
+    margin-left: 2vw;
+    width: fit-content;
+    background-color: darkblue;
+    color: white;
+    margin-right: 3vw;
+}
+
+#forecastDay2 {
+    border: solid lime 1px;
+    height: 35vh;
+    overflow: hidden;
+    float: left;
+    background-color: darkblue;
+    color: white;
+    margin-right: 3vw;
+}
+
+#forecastDay3 {
+    border: solid blue 1px;
+    height: 35vh;
+    overflow: hidden;
+    float: left;
+    background-color: darkblue;
+    color: white;
+    margin-right: 3vw;
+}
+
+#forecastDay4 {
+    border: solid black 1px;
+    height: 35vh;
+    overflow: hidden;
+    float: left;
+    background-color: darkblue;
+    color: white;
+    margin-right: 3vw;
+}
+
+#forecastDay5 {
+    border: solid red 1px;
+    height: 35vh;
+    overflow: hidden;
+    float: left;
+    background-color: darkblue;
+    color: white;
+    margin-right: 3vw;
+}
+*/

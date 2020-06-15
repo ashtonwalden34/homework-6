@@ -18,8 +18,6 @@ searchBtn.on("click", function(event) {
     
     // adds the list item to search history
     $("#searchHistoryList").append(liCity);
-
-
     currentWeatherSearch();
     forecastWeatherSearch();
 });
@@ -95,25 +93,30 @@ function forecastWeatherSearch() {
         console.log(response.list)
 
         // Sets varaible for forecast data div
-        let forecastDiv = $("#weatherForecast");
+        let forecastDiv = $("#weatherForecast")
+
+        /*
+        let forecastDay1 = $("#forecastDay1");
+        let forecastDay2 = $("#forecastDay2");
+        let forecastDay3 = $("#forecastDay3");
+        let forecastDay4 = $("#forecastDay4");
+        let forecastDay5 = $("#forecastDay5");
+        */
+        
 
         var forecastDateArray = [];
 
-
         for (var i = 0; i < response.list.length; i++) {
            // console.log(response.list[i].dt_txt.split(' '))
-
             if (response.list[i].dt_txt.split(' ')[1] === "00:00:00") {
                 forecastDateArray.push(response.list[i])
-
-               
             }
         }
 
         for (var i = 0; i < forecastDateArray.length; i++) {
-            console.log(forecastDateArray[i].main.temp);
-
-            let forecastDate = forecastDateArray[i].dt_txt;
+            
+            let forecastDateTime = forecastDateArray[i].dt_txt;
+            let forecastDate = forecastDateTime.split(' ')[0];
             let forecastTemp = forecastDateArray[i].main.temp;
             let forecastHumidity = forecastDateArray[i].main.humidity;
             let forecastIcon = forecastDateArray[i].weather[0].icon;
@@ -132,8 +135,6 @@ function forecastWeatherSearch() {
 
 
 
-        
-        
     })
 };
 
