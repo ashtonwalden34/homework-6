@@ -64,7 +64,7 @@ function currentWeatherSearch() {
         let iconDisplay = $("<img>").attr("src", iconLink);
         let tempDisplay = $("<li>").text("Temperature: " + tempF);
         let windSpeedDisplay = $("<li>").text("Wind speed: " + windSpeed + " mph");
-        let humidityDisplay = $("<li>").text("Humidity: " + humidity);
+        let humidityDisplay = $("<li>").text("Humidity: " + humidity + " %");
 
         // Displays API response variables that are stored as html elements
         currentCityDiv.html(nameDisplay);
@@ -115,13 +115,14 @@ function forecastWeatherSearch() {
             let forecastDateTime = forecastDateArray[i].dt_txt;
             let forecastDate = forecastDateTime.split(' ')[0];
             let forecastTemp = forecastDateArray[i].main.temp;
+            let forecastTempF = ((forecastTemp - 273.15) * 9/5 + 32).toFixed(2);
             let forecastHumidity = forecastDateArray[i].main.humidity;
             let forecastIcon = forecastDateArray[i].weather[0].icon;
             let forecastIconUrl = "https://openweathermap.org/img/wn/" + forecastIcon + "@2x.png";
 
             let forecastDateDisplay = $("<p>").text(forecastDate);
-            let forecastTempDisplay = $("<p>").text("Temperature: " + forecastTemp);
-            let forecastHumidityDisplay = $("<p>").text("Humidity: " + forecastHumidity);
+            let forecastTempDisplay = $("<p>").text("Temperature: " + forecastTempF);
+            let forecastHumidityDisplay = $("<p>").text("Humidity: " + forecastHumidity + " %");
             let forecastIconDisplay = $("<img>").attr("src", forecastIconUrl);
 
             forecastDiv.append(forecastDateDisplay);
