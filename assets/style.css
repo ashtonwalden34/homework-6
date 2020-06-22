@@ -1,21 +1,25 @@
-.pageWrapper {
+html {
     background-color: lightblue;
-    height: 100vh;
-    width: 100vw;
+    font-size: 3vw;
+}
+
+#test {
+    border: solid seagreen 1px;
+}
+#test2 {
+    border: solid red 1px;
 }
 
 #searchWrapper {
     border: solid navajowhite 1px;
     height: 100vh;
     text-align: center;
-    padding-top: 2vh;
-    width: 20vw;  
+    padding-top: 2vh; 
 }
 
 #citySearch {
     border: solid blue 1px;
     padding-top: 2vh;
-    width: 18vw;
 }
 
 #searchHistory {
@@ -23,7 +27,6 @@
     padding-top: 2vh;
     height: 76vh;
     overflow: hidden;
-    width: 18vw;
 }
 
 #searchHistoryTitle {
@@ -36,7 +39,6 @@
     height: 94.5vh;
     padding-top: 2vh;
     overflow: hidden;
-    width: 80vw;
     margin-right: 0;
     float: right;
 }
@@ -52,53 +54,13 @@
     overflow: hidden;
 }
 
-#currentWeatherConditions {
-    text-align: center;
-}
-
-#currentWeatherIcon {
-    height: auto;
-    border: solid red 1px;
-    text-align: center;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #currentWeatherTitle {
     text-decoration-line: underline;
     margin: 0;
+}
+
+#currentWeatherConditions {
+    text-align: center;
 }
 
 #weatherForecast {
@@ -111,56 +73,55 @@
     margin: 0;
 }
 
-/*
+
 #forecastDay1 {
     border: solid purple 1px;
     height: 35vh;
     overflow: hidden;
     float: left;
-    margin-left: 2vw;
-    width: fit-content;
     background-color: darkblue;
     color: white;
-    margin-right: 3vw;
+    margin-right: 2vw;
+    margin-left: 2vw;
+    margin-top: 1vw;
 }
 
 #forecastDay2 {
-    border: solid lime 1px;
     height: 35vh;
     overflow: hidden;
     float: left;
     background-color: darkblue;
     color: white;
-    margin-right: 3vw;
+    margin-right: 2vw;
+    margin-top: 1vw;
 }
 
 #forecastDay3 {
-    border: solid blue 1px;
     height: 35vh;
     overflow: hidden;
     float: left;
     background-color: darkblue;
     color: white;
-    margin-right: 3vw;
+    margin-right: 2vw;
+    margin-top: 1vw;
 }
 
 #forecastDay4 {
-    border: solid black 1px;
     height: 35vh;
     overflow: hidden;
     float: left;
     background-color: darkblue;
     color: white;
-    margin-right: 3vw;
+    margin-right: 2vw;
+    margin-top: 1vw;
 }
 
 #forecastDay5 {
-    border: solid red 1px;
     height: 35vh;
     overflow: hidden;
     float: left;
     background-color: darkblue;
     color: white;
-    margin-right: 3vw;
+    margin-right: 2vw;
+    margin-top: 1vw;
 }
-*/

@@ -10,55 +10,48 @@
 
 <body>
 
-<div class="pageWrapper">
+    <!-- Navbar goes here -->
+
+    <!-- Page Layout here -->
     <div class="row">
 
-        <div class="col s5 m4 l4" id="searchWrapper">
+        <div class="col s12 m4 l3" id="test"> <!-- Note that "m4 l3" was added -->
             <form id="citySearch">
                 <label for="cityInput">Search by city name</label>
                 <input type="text" id="cityInput">
                 <input id="searchBtn" type="submit" value="Search">
             </form>
-            <!-- Store previous searches here -->
+
             <div id="searchHistory">
                 <h4 id="searchHistoryTitle">Search History</h4>
                 <ul class="collection" id="searchHistoryList"> </ul>
                     <li class="collection-item"></li>
             </div>
-        </div>
 
-        <div class="col s7 m8 l8" id="weatherWrapper">
-            <!-- Place holder for current weather response -->
+        </div>
+         
+  
+        
+  
+        <div class="col s12 m8 l9" id="test2"> <!-- Note that "m8 l9" was added -->
             <div id="currentWeather">
                 <h4 id="currentWeatherTitle">Current Weather</h4>
                 <div id="currentCityName"></div>
                 <div id="currentDate"></div>
-                <ul class="col s4 m4 l4 push-s3 push-m3 push-l3" id="currentWeatherConditions">
+                <ul id="currentWeatherConditions">
                     <li id=currentWeatherConditionsTemp></li>
                     <li id=currentWeatherConditionsWind></li>
                     <li id=currentWeatherConditionsHumidity></li>
-                </ul>
-
-                <div class="col s2 m2 l2 push-s2 push-m2 push-l2" id="currentWeatherIcon"></div> 
+                    <li id="currentWeatherIcon"></li>
+                    <li id=currentUV></li>
             </div>
 
-            <!-- Place holder for forecast response -->
             <div id="weatherForecast">
                 <h4 id="forecastTitle">5 Day Forecast</h4>
-
-                <!-- 
-                <div class="card" id="forecastDay1"></div>
-                <div class="card" id="forecastDay2"></div>
-                <div class="card" id="forecastDay3"></div>
-                <div class="card" id="forecastDay4"></div>
-                <div class="card" id="forecastDay5"></div>
-                -->
-
             </div>
-        </div>
+      </div>
 
-    </div>
-</div>
+
 
 <script
   src="https://code.jquery.com/jquery-3.5.1.js"
