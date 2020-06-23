@@ -29,6 +29,9 @@ searchBtn.on("click", function(event) {
     // runs current weather & forecast functions
     currentWeatherSearch();
     forecastWeatherSearch();
+    // places "city" in local storage
+    window.localStorage.setItem(searchCity);
+    console.log(localStorage);
 });
 
 // function to make API call for current weather conditions
@@ -99,13 +102,15 @@ function getUV(lat, lon) {
         // adds uv index to hmtl page
         currentUV.html(uvDisplay);
         // function to change background color of uv index based on danger level
-    }).then (function(uv) {
-        if (uv.val() < 3) {
-            $("#currentUV").style.bgcolor = "green";
-        } else if (uv.val() > 7 && uv.val() < 3) {  
-            $("#currentUV").style.bgcolor = "yellow";
+        console.log(uv);
+        if (uv < 3) {
+
+            $("#currentUV").css("background-color", "green");
+        } else if (uv > 7 && uv < 3) {  
+            $("#currentUV").css("background-color", "yellow")
         } else {
-            $("#currentUV").style.bgcolor = "red";
+            $("#currentUV").css("background-color", "red")
+            console.log("hit");
         }
     })
 };
@@ -122,9 +127,11 @@ function forecastWeatherSearch() {
         method: "GET"
     }).then (function(response) {
         // Sets varaible for forecast data div
-        let forecastDiv = $("#weatherForecast")
+        let forecastDiv = $("#forecast")
         // array to store forecast dates
         var forecastDateArray = [];
+
+        
         // adds only one response per day to the array
         for (var i = 0; i < response.list.length; i++) {
             if (response.list[i].dt_txt.split(' ')[1] === "00:00:00") {
@@ -146,10 +153,14 @@ function forecastWeatherSearch() {
             let forecastHumidityDisplay = $("<p>").text("Humidity: " + forecastHumidity + " %");
             let forecastIconDisplay = $("<img>").attr("src", forecastIconUrl);
             // adds forecast variables to the page
-            forecastDiv.append(forecastDateDisplay);
-            forecastDiv.append(forecastTempDisplay);
-            forecastDiv.append(forecastHumidityDisplay);
-            forecastDiv.append(forecastIconDisplay);
+            let forecastCol = $("<div>")
+            forecastCol.addClass("col")
+            forecastCol.append(forecastDateDisplay);
+            forecastCol.append(forecastTempDisplay);
+            forecastCol.append(forecastHumidityDisplay);
+            forecastCol.append(forecastIconDisplay);
+
+            forecastDiv.append(forecastCol);
          }
     })
 };
