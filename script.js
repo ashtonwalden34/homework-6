@@ -31,8 +31,8 @@ searchBtn.on("click", function(event, searchCity) {
     forecastWeatherSearch();
     // places "city" in local storage
     window.localStorage.setItem("searchCity", JSON.stringify(searchCity));
-    console.log(localStorage);
-    console.log(searchCity);
+    // console.log(localStorage);
+    // console.log(searchCity);
 });
 
 // function to make API call for current weather conditions
@@ -166,12 +166,26 @@ function forecastWeatherSearch() {
 };
 
 // function to allow user to search by clicking on a city in search history
-$(document).on("click", '.collection-item',function(event, searchCity) {
+$(document).on("click", '.collection-item',function(event, forecastDiv) {
     event.preventDefault();
 
-    let searchHistoryCity = $(".collection-item").text();
-    console.log(searchCity);
+    // let i = ($(".collection-item"));
+    // console.log(i);
+
+    let searchHistoryCity = $(".collection-item")[0].textContent;
+
+    // console.log(searchHistoryCity);
 
     currentWeatherSearch(searchHistoryCity);
     forecastWeatherSearch(searchHistoryCity);
 });
+
+function storageSearch() {
+    var storedCity = localStorage.getItem("searchCity");
+    
+    currentWeatherSearch(storedCity);
+    forecastWeatherSearch(storedCity);
+};
+
+// console.log(localStorage);
+document.onload(storageSearch());
