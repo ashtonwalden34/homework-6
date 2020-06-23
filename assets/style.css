@@ -4,13 +4,6 @@ html {
     font-size: 2vh;
 }
 
-#searchWrapper {
-    border: solid navajowhite 1px;
-    height: 100vh;
-    text-align: center;
-    padding-top: 2vh; 
-}
-
 #citySearch {
     border: solid blue 1px;
     padding-top: 2vh;
@@ -19,7 +12,7 @@ html {
 #searchHistory {
     border: solid purple 1px;
     padding-top: 2vh;
-    height: 76vh;
+    height: fit-content;
     overflow: hidden;
 }
 
@@ -28,24 +21,15 @@ html {
     margin: 0;
 }
 
-#weatherWrapper {
-    border: solid red 1px;
-    height: 94.5vh;
-    padding-top: 2vh;
-    overflow: hidden;
-    margin-right: 0;
-    float: right;
-}
-
 #currentDate{
     font-size: large;
 }
 
 #currentWeather {
-    height: 45vh;
     border: solid green 3px;
     text-align: center;
     overflow: hidden;
+    height: fit-content;
 }
 
 #currentWeatherTitle {

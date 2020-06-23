@@ -17,10 +17,10 @@ let date = month + '-' + day + '-' + year;
 $("#currentDate").text(date);
 
 // Function when search button is clicked
-searchBtn.on("click", function(event) {
+searchBtn.on("click", function(event, searchCity) {
     event.preventDefault();
     // assigns new variable for name of city
-    let searchCity = $("#cityInput").val();
+    var searchCity = $("#cityInput").val();
     // Creates a new list item and stores the city name
     // stores searched city in list item in html
     var liCity = $("<li>").addClass("collection-item").text(searchCity);
@@ -30,8 +30,9 @@ searchBtn.on("click", function(event) {
     currentWeatherSearch();
     forecastWeatherSearch();
     // places "city" in local storage
-    window.localStorage.setItem(searchCity);
+    window.localStorage.setItem("searchCity", JSON.stringify(searchCity));
     console.log(localStorage);
+    console.log(searchCity);
 });
 
 // function to make API call for current weather conditions
@@ -102,7 +103,6 @@ function getUV(lat, lon) {
         // adds uv index to hmtl page
         currentUV.html(uvDisplay);
         // function to change background color of uv index based on danger level
-        console.log(uv);
         if (uv < 3) {
 
             $("#currentUV").css("background-color", "green");
@@ -110,7 +110,6 @@ function getUV(lat, lon) {
             $("#currentUV").css("background-color", "yellow")
         } else {
             $("#currentUV").css("background-color", "red")
-            console.log("hit");
         }
     })
 };
@@ -160,18 +159,18 @@ function forecastWeatherSearch() {
             forecastCol.append(forecastHumidityDisplay);
             forecastCol.append(forecastIconDisplay);
 
+            // forecastDiv.empty();
             forecastDiv.append(forecastCol);
          }
     })
 };
 
 // function to allow user to search by clicking on a city in search history
-$(document).on("click", '.collection-item',function(event) {
+$(document).on("click", '.collection-item',function(event, searchCity) {
     event.preventDefault();
 
-    let searchHistoryCity = $(".collection-item").text().trim();
-
-    console.log(searchHistoryCity);
+    let searchHistoryCity = $(".collection-item").text();
+    console.log(searchCity);
 
     currentWeatherSearch(searchHistoryCity);
     forecastWeatherSearch(searchHistoryCity);
