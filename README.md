@@ -10,6 +10,7 @@ An app that allows the user to search for a city and have the current weather al
 - CSS
 - JavaScript
 - AJAX
+- openweathermap.org Weather API
 
 # Links
 - GitHub Repository: https://github.com/ashtonwalden34/weather-dashboard
